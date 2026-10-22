@@ -212,7 +212,7 @@ def summary(book):
 
 def average_rating(book):
     stars = [review["stars"] for review in book["reviews"]]
-    return round(sum(stars) / len(stars), 1)
+    return round(sum(stars) / len(stars), 1) if stars else 0.0
 
 
 def details(book):
