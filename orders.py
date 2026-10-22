@@ -26,7 +26,9 @@ class OrderError(Exception):
 
 
 def _sign(payload):
-    secret = os.environ["ORDER_SIGNING_SECRET"]
+    secret = os.getenv("ORDER_SIGNING_SECRET")
+    if secret is None:
+        raise OrderError("Missing ORDER_SIGNING_SECRET environment variable.")
     return hmac.new(secret.encode(), payload.encode(), hashlib.sha256).hexdigest()[:24]
 
 
